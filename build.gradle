@@ -69,8 +69,8 @@ project(":core") {
     apply plugin: "java"
 
     dependencies {
+        compile project(":engine")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        
     }
 }
 
