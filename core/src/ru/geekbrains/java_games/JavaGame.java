@@ -5,13 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import ru.geekuniversity.engine.Base2DScreen;
 
 public class JavaGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture img;
 	private Texture textureBackground;
     private Texture textureCircle;
+    private Base2DScreen base2DScreen;
 	
 	@Override
 	public void create () {
