@@ -1,5 +1,6 @@
 package ru.geekbrains.java_games.screens.menu;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,10 @@ public class MenuScreen extends Base2DScreen {
     private Texture img;
     private Texture textureBackground;
     private Texture textureCircle;
+
+    public MenuScreen(Game game) {
+        super(game);
+    }
 
     @Override
     public void show() {
