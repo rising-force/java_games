@@ -22,8 +22,8 @@ public class MenuScreen extends Base2DScreen {
     public void show() {
         super.show();
         batch = new SpriteBatch();
+        batch.getProjectionMatrix().idt().translate(0.1f, 0.2f, 0f).scale(0.1f, 0.1f, 1f);
         textureCircle = new Texture("circle.png");
-        MatrixUtils.method();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class MenuScreen extends Base2DScreen {
         Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(textureCircle, 0, 0);
+        batch.draw(textureCircle, -1f, -1f, 2f, 2f);
         batch.end();
     }
 

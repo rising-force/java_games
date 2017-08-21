@@ -3,6 +3,7 @@ package ru.geekuniversity.engine.math;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public final class MatrixUtils {
 
@@ -17,6 +18,10 @@ public final class MatrixUtils {
         vector2.mul(matrix3);
         System.out.println(vector2);
 
+        Vector3 vector3 = new Vector3();
         Matrix4 matrix4 = new Matrix4();
+        matrix4.idt().scale(1f, 2f, 4f).translate(10,3,4);
+        vector3.mul(matrix4);
+
     }
 }
