@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import ru.geekuniversity.engine.Base2DScreen;
+import ru.geekuniversity.engine.math.MatrixUtils;
 
 public class MenuScreen extends Base2DScreen {
 
@@ -22,6 +23,7 @@ public class MenuScreen extends Base2DScreen {
         super.show();
         batch = new SpriteBatch();
         textureCircle = new Texture("circle.png");
+        MatrixUtils.method();
     }
 
     @Override
