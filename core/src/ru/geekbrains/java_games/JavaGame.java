@@ -5,15 +5,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class JavaGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Texture img;
+	private Texture textureBackground;
+    private Texture textureCircle;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		textureBackground = new Texture("bg.png");
+        textureCircle = new Texture("circle.png");
 	}
 
 	@Override
@@ -21,7 +26,9 @@ public class JavaGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		batch.draw(textureBackground, 0, 0);
 		batch.draw(img, 0, 0);
+        batch.draw(textureCircle, 0, 0);
 		batch.end();
 	}
 	
@@ -29,5 +36,7 @@ public class JavaGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		textureBackground.dispose();
+        textureCircle.dispose();
 	}
 }
