@@ -3,6 +3,7 @@ package ru.geekbrains.java_games.screens.menu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -52,6 +53,15 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     public void render (float delta) {
+        update(delta);
+        draw();
+    }
+
+    private void update(float deltaTime) {
+        star.update(deltaTime);
+    }
+
+    private void draw() {
         Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();

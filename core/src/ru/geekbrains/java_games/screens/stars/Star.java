@@ -25,4 +25,17 @@ public class Star extends Sprite {
         float posY = Rnd.nextFloat(worldBounds.getBottom(), worldBounds.getTop());
         pos.set(posX, posY);
     }
+
+    @Override
+    public void update(float deltaTime) {
+        pos.mulAdd(v, deltaTime);
+        checkAndHandleBounds();
+    }
+
+    protected void checkAndHandleBounds() {
+        if (getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
+        if (getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
+        if (getTop() < worldBounds.getBottom()) setBottom(worldBounds.getTop());
+        if (getBottom() > worldBounds.getTop()) setTop(worldBounds.getBottom()); ;
+    }
 }
