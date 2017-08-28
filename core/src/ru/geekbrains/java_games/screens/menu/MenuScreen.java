@@ -48,7 +48,7 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
-        System.out.println(touch);
+        star.touchDown(touch, pointer);
     }
 
     @Override

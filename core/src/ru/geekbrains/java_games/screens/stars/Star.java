@@ -27,6 +27,14 @@ public class Star extends Sprite {
     }
 
     @Override
+    public boolean touchDown(Vector2 touch, int pointer) {
+        if(isMe(touch)) {
+            System.out.println("Попали");
+        }
+        return false;
+    }
+
+    @Override
     public void update(float deltaTime) {
         pos.mulAdd(v, deltaTime);
         checkAndHandleBounds();
