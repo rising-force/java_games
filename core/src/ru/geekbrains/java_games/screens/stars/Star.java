@@ -36,6 +36,6 @@ public class Star extends Sprite {
         if (getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
         if (getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
         if (getTop() < worldBounds.getBottom()) setBottom(worldBounds.getTop());
-        if (getBottom() > worldBounds.getTop()) setTop(worldBounds.getBottom()); ;
+        if (getBottom() > worldBounds.getTop()) setTop(worldBounds.getBottom());
     }
 }
