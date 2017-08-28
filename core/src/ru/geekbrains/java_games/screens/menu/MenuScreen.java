@@ -8,11 +8,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekuniversity.engine.Base2DScreen;
+import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.sprites.Sprite;
 
 public class MenuScreen extends Base2DScreen {
 
-    private Texture textureCircle;
+    private Sprite2DTexture textureCircle;
     private TextureRegion textureRegion;
     private Sprite circle;
 
@@ -23,7 +24,7 @@ public class MenuScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
-        textureCircle = new Texture("circle.png");
+        textureCircle = new Sprite2DTexture("circle.png");
         circle = new Sprite(new TextureRegion(textureCircle));
         circle.setWidthProportion(0.67f);
     }
