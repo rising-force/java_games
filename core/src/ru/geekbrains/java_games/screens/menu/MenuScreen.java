@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.geekuniversity.engine.Base2DScreen;
 
@@ -20,6 +21,11 @@ public class MenuScreen extends Base2DScreen {
     public void show() {
         super.show();
         textureCircle = new Texture("circle.png");
+    }
+
+    @Override
+    protected void touchDown(Vector2 touch, int pointer) {
+        System.out.println(touch);
     }
 
     @Override
