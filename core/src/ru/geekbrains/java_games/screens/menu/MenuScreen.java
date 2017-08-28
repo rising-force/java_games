@@ -25,7 +25,7 @@ public class MenuScreen extends Base2DScreen {
         super.show();
         textureCircle = new Texture("circle.png");
         circle = new Sprite(new TextureRegion(textureCircle));
-        circle.setSize(1f, 1f);
+        circle.setWidthProportion(0.67f);
     }
 
     @Override
