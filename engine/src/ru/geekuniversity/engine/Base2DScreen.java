@@ -51,11 +51,6 @@ public class Base2DScreen implements Screen, InputProcessor {
     }
 
     @Override
-    public void render(float delta) {
-
-    }
-
-    @Override
     public void resize(int width, int height) {
         System.out.println("resize: width = " + width + " height = " + height);
         screenBounds.setSize(width, height);
@@ -75,7 +70,10 @@ public class Base2DScreen implements Screen, InputProcessor {
     }
 
     protected void resize(Rect worldBounds) {
+    }
 
+    @Override
+    public void render(float delta) {
     }
 
     @Override
