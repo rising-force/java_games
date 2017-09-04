@@ -1,15 +1,15 @@
 package ru.geekbrains.java_games.screens.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import ru.geekuniversity.engine.sprites.Sprite;
 
-public class MainShip extends Sprite {
+class MainShip extends Sprite {
 
-    public MainShip(TextureAtlas atlas) {
-        TextureRegion region = atlas.findRegion("main_ship");
-        region.split()
-//        super(region);
+    private static final float SHIP_HEIGHT = 0.15f;
+
+    MainShip(TextureAtlas atlas) {
+        super(atlas.findRegion("main_ship"), 1, 2, 2);
+        setHeightProportion(SHIP_HEIGHT);
     }
 }
