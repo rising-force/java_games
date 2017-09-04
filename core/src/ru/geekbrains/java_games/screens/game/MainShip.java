@@ -27,11 +27,19 @@ class MainShip extends Sprite {
         setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
     }
 
+    private static final int INVALID_POINTER = -1;
+    private int leftPointer = INVALID_POINTER;
+    private int rightPointer = INVALID_POINTER;
+
     @Override
     public boolean touchDown(Vector2 touch, int pointer) {
         if(touch.x < worldBounds.pos.x) {
+            if(leftPointer != INVALID_POINTER) return false;
+            leftPointer = pointer;
             moveLeft();
         } else {
+            if(rightPointer != INVALID_POINTER) return false;
+            rightPointer = pointer;
             moveRight();
         }
         return false;
@@ -39,7 +47,13 @@ class MainShip extends Sprite {
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer) {
-        stop();
+        if(pointer == leftPointer) {
+            leftPointer = INVALID_POINTER;
+            if(rightPointer != INVALID_POINTER) moveRight(); else stop();
+        } else if(pointer == rightPointer) {
+            rightPointer = INVALID_POINTER;
+            if(leftPointer != INVALID_POINTER) moveLeft(); else stop();
+        }
         return false;
     }
 
