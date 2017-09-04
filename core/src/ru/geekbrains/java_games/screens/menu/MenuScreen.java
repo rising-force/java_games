@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.geekbrains.java_games.screens.game.GameScreen;
 import ru.geekbrains.java_games.screens.stars.Star;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Sprite2DTexture;
@@ -77,7 +78,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         if(src == buttonExit) {
             Gdx.app.exit();
         } else if(src == buttonNewGame) {
-            System.out.println("переключили на GameScreen");
+            game.setScreen(new GameScreen(game));
         } else {
             throw new RuntimeException("Unknown src = " + src);
         }
