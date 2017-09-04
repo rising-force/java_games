@@ -12,12 +12,35 @@ class MainShip extends Sprite {
     private static final float SHIP_HEIGHT = 0.15f;
     private static final float  BOTTOM_MARGIN = 0.05f;
 
+    private Rect worldBounds;
     private final Vector2 v0 = new Vector2(0.5f, 0f);
     private final Vector2 v = new Vector2();
 
     MainShip(TextureAtlas atlas) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         setHeightProportion(SHIP_HEIGHT);
+    }
+
+    @Override
+    public void resize(Rect worldBounds) {
+        this.worldBounds = worldBounds;
+        setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
+    }
+
+    @Override
+    public boolean touchDown(Vector2 touch, int pointer) {
+        if(touch.x < worldBounds.pos.x) {
+            moveLeft();
+        } else {
+            moveRight();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(Vector2 touch, int pointer) {
+        stop();
+        return false;
     }
 
     private boolean pressedLeft;
@@ -69,11 +92,6 @@ class MainShip extends Sprite {
 
     private void stop() {
         v.setZero();
-    }
-
-    @Override
-    public void resize(Rect worldBounds) {
-        setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
     }
 
     @Override
