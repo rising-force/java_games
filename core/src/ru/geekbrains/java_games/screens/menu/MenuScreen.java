@@ -12,16 +12,21 @@ import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.math.Rnd;
+import ru.geekuniversity.engine.ui.ActionListener;
 
-public class MenuScreen extends Base2DScreen {
+public class MenuScreen extends Base2DScreen implements ActionListener {
 
     private static final int STARS_COUNT = 250;
     private static final float STAR_HEIGHT = 0.01f;
+
+    private static final float BUTTONS_HEIGHT = 0.15f;
+    private static final float BUTTONS_PRESS_SCALE = 0.9f;
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
     private Background background;
     private final Star[] stars = new Star[STARS_COUNT];
+    private ButtonExit buttonExit;
 
     public MenuScreen(Game game) {
         super(game);
@@ -40,6 +45,8 @@ public class MenuScreen extends Base2DScreen {
             float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
             stars[i] = new Star(regionStar, vx, vy, starHeight);
         }
+        buttonExit = new ButtonExit(atlas, this, BUTTONS_PRESS_SCALE);
+        buttonExit.setHeightProportion(BUTTONS_HEIGHT);
     }
 
     @Override
@@ -50,7 +57,21 @@ public class MenuScreen extends Base2DScreen {
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
+        buttonExit.touchDown(touch, pointer);
+    }
 
+    @Override
+    protected void touchUp(Vector2 touch, int pointer) {
+        buttonExit.touchUp(touch, pointer);
+    }
+
+    @Override
+    public void actionPerformed(Object src) {
+        if(src == buttonExit) {
+            Gdx.app.exit();
+        } else {
+            throw new RuntimeException("Unknown src = " + src);
+        }
     }
 
     @Override
@@ -69,6 +90,7 @@ public class MenuScreen extends Base2DScreen {
         batch.begin();
         background.draw(batch);
         for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
+        buttonExit.draw(batch);
         batch.end();
     }
 
