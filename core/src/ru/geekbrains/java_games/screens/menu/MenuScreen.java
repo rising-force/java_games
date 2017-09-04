@@ -31,7 +31,7 @@ public class MenuScreen extends Base2DScreen {
     public void show() {
         super.show();
         textureBackground = new Sprite2DTexture("textures/bg.png");
-        atlas = new TextureAtlas("textures/mainAtlas.pack");
+        atlas = new TextureAtlas("textures/menuAtlas.tpack");
         background = new Background(new TextureRegion(textureBackground));
         TextureRegion regionStar = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {

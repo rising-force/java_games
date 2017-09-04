@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		float aspect = 480f / 854f;
 //        float aspect = 3f / 4f;
 
-		config.height = 900;
+		config.height = 800;
 		config.width = (int)(config.height * aspect);
 		new LwjglApplication(new StarGame(), config);
 	}
