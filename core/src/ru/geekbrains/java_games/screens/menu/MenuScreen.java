@@ -27,6 +27,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
     private Background background;
     private final Star[] stars = new Star[STARS_COUNT];
     private ButtonExit buttonExit;
+    private ButtonNewGame buttonNewGame;
 
     public MenuScreen(Game game) {
         super(game);
@@ -45,6 +46,8 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
             float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
             stars[i] = new Star(regionStar, vx, vy, starHeight);
         }
+        buttonNewGame = new ButtonNewGame(atlas, this, BUTTONS_PRESS_SCALE);
+        buttonNewGame.setHeightProportion(BUTTONS_HEIGHT);
         buttonExit = new ButtonExit(atlas, this, BUTTONS_PRESS_SCALE);
         buttonExit.setHeightProportion(BUTTONS_HEIGHT);
     }
@@ -54,22 +57,27 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         background.resize(worldBounds);
         for (int i = 0; i < stars.length; i++) stars[i].resize(worldBounds);
         buttonExit.resize(worldBounds);
+        buttonNewGame.resize(worldBounds);
     }
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
         buttonExit.touchDown(touch, pointer);
+        buttonNewGame.touchDown(touch, pointer);
     }
 
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
         buttonExit.touchUp(touch, pointer);
+        buttonNewGame.touchUp(touch, pointer);
     }
 
     @Override
     public void actionPerformed(Object src) {
         if(src == buttonExit) {
             Gdx.app.exit();
+        } else if(src == buttonNewGame) {
+            System.out.println("переключили на GameScreen");
         } else {
             throw new RuntimeException("Unknown src = " + src);
         }
@@ -92,6 +100,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         background.draw(batch);
         for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
         buttonExit.draw(batch);
+        buttonNewGame.draw(batch);
         batch.end();
     }
 
