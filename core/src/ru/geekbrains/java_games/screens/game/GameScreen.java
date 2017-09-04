@@ -3,10 +3,17 @@ package ru.geekbrains.java_games.screens.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import ru.geekbrains.java_games.Background;
 import ru.geekuniversity.engine.Base2DScreen;
+import ru.geekuniversity.engine.Sprite2DTexture;
+import ru.geekuniversity.engine.math.Rect;
 
 public class GameScreen extends Base2DScreen {
+
+    private Sprite2DTexture textureBackground;
+    private Background background;
 
     public GameScreen(Game game) {
         super(game);
@@ -15,6 +22,14 @@ public class GameScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
+        textureBackground = new Sprite2DTexture("textures/bg.png");
+
+        background = new Background(new TextureRegion(textureBackground));
+    }
+
+    @Override
+    protected void resize(Rect worldBounds) {
+        background.resize(worldBounds);
     }
 
     @Override
@@ -41,12 +56,13 @@ public class GameScreen extends Base2DScreen {
         Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-
+        background.draw(batch);
         batch.end();
     }
 
     @Override
     public void dispose() {
+        textureBackground.dispose();
         super.dispose();
     }
 }

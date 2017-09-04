@@ -25,7 +25,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
-    private Background background;
+    private ru.geekbrains.java_games.Background background;
     private final Star[] stars = new Star[STARS_COUNT];
     private ButtonExit buttonExit;
     private ButtonNewGame buttonNewGame;
@@ -39,7 +39,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         super.show();
         textureBackground = new Sprite2DTexture("textures/bg.png");
         atlas = new TextureAtlas("textures/menuAtlas.tpack");
-        background = new Background(new TextureRegion(textureBackground));
+        background = new ru.geekbrains.java_games.Background(new TextureRegion(textureBackground));
         TextureRegion regionStar = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {
             float vx = Rnd.nextFloat(-0.005f, 0.005f);

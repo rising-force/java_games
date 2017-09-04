@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games.screens.menu;
+package ru.geekbrains.java_games;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
