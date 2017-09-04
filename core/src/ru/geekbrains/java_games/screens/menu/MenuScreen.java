@@ -3,7 +3,6 @@ package ru.geekbrains.java_games.screens.menu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -16,12 +15,13 @@ import ru.geekuniversity.engine.math.Rnd;
 
 public class MenuScreen extends Base2DScreen {
 
-    private static final float STAR_WIDTH = 0.01f;
+    private static final int STARS_COUNT = 250;
+    private static final float STAR_HEIGHT = 0.01f;
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
     private Background background;
-    private Star star;
+    private final Star[] stars = new Star[STARS_COUNT];
 
     public MenuScreen(Game game) {
         super(game);
@@ -34,21 +34,23 @@ public class MenuScreen extends Base2DScreen {
         atlas = new TextureAtlas("textures/mainAtlas.pack");
         background = new Background(new TextureRegion(textureBackground));
         TextureRegion regionStar = atlas.findRegion("star");
-        float vx = Rnd.nextFloat(-0.005f, 0.005f);
-        float vy = Rnd.nextFloat(-0.05f, -0.1f);
-        float starWidth = STAR_WIDTH * Rnd.nextFloat(0.75f, 1f);
-        star = new Star(regionStar, vx, vy, starWidth);
+        for (int i = 0; i < stars.length; i++) {
+            float vx = Rnd.nextFloat(-0.005f, 0.005f);
+            float vy = Rnd.nextFloat(-0.05f, -0.1f);
+            float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
+            stars[i] = new Star(regionStar, vx, vy, starHeight);
+        }
     }
 
     @Override
     protected void resize(Rect worldBounds) {
         background.resize(worldBounds);
-        star.resize(worldBounds);
+        for (int i = 0; i < stars.length; i++) stars[i].resize(worldBounds);
     }
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
-        star.touchDown(touch, pointer);
+
     }
 
     @Override
@@ -58,7 +60,7 @@ public class MenuScreen extends Base2DScreen {
     }
 
     private void update(float deltaTime) {
-        star.update(deltaTime);
+        for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
     }
 
     private void draw() {
@@ -66,7 +68,7 @@ public class MenuScreen extends Base2DScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         background.draw(batch);
-        star.draw(batch);
+        for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
         batch.end();
     }
 

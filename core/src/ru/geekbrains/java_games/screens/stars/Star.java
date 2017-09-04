@@ -12,10 +12,10 @@ public class Star extends Sprite {
     private final Vector2 v = new Vector2();
     private Rect worldBounds;
 
-    public Star(TextureRegion region, float vx, float vy, float width) {
+    public Star(TextureRegion region, float vx, float vy, float height) {
         super(region);
         v.set(vx, vy);
-        setWidthProportion(width);
+        setHeightProportion(height);
     }
 
     @Override
@@ -24,14 +24,6 @@ public class Star extends Sprite {
         float posX = Rnd.nextFloat(worldBounds.getLeft(), worldBounds.getRight());
         float posY = Rnd.nextFloat(worldBounds.getBottom(), worldBounds.getTop());
         pos.set(posX, posY);
-    }
-
-    @Override
-    public boolean touchDown(Vector2 touch, int pointer) {
-        if(isMe(touch)) {
-            System.out.println("Попали");
-        }
-        return false;
     }
 
     @Override
