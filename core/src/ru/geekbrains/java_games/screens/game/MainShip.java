@@ -20,14 +20,19 @@ class MainShip extends Sprite {
         setHeightProportion(SHIP_HEIGHT);
     }
 
+    private boolean pressedLeft;
+    private boolean pressedRight;
+
     void keyDown(int keycode) {
         switch (keycode) {
             case Input.Keys.A:
             case Input.Keys.LEFT:
+                pressedLeft = true;
                 moveLeft();
                 break;
             case Input.Keys.D:
             case Input.Keys.RIGHT:
+                pressedRight = true;
                 moveRight();
                 break;
             case Input.Keys.UP:
@@ -40,9 +45,13 @@ class MainShip extends Sprite {
         switch (keycode) {
             case Input.Keys.A:
             case Input.Keys.LEFT:
+                pressedLeft = false;
+                if(pressedRight) moveRight(); else stop();
+                break;
             case Input.Keys.D:
             case Input.Keys.RIGHT:
-                stop();
+                pressedRight = false;
+                if(pressedLeft) moveLeft(); else stop();
                 break;
             case Input.Keys.UP:
                 frame = 0;
@@ -70,6 +79,5 @@ class MainShip extends Sprite {
     @Override
     public void update(float deltaTime) {
         pos.mulAdd(v, deltaTime);
-
     }
 }
