@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.java_games.Background;
 import ru.geekuniversity.engine.Base2DScreen;
@@ -35,6 +36,29 @@ public class GameScreen extends Base2DScreen {
     @Override
     protected void resize(Rect worldBounds) {
         background.resize(worldBounds);
+        mainShip.resize(worldBounds);
+    }
+
+    @Override
+    protected void touchDown(Vector2 touch, int pointer) {
+        mainShip.touchDown(touch, pointer);
+    }
+
+    @Override
+    protected void touchUp(Vector2 touch, int pointer) {
+        mainShip.touchUp(touch, pointer);
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        mainShip.keyDown(keycode);
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        mainShip.keyUp(keycode);
+        return false;
     }
 
     @Override
@@ -46,7 +70,7 @@ public class GameScreen extends Base2DScreen {
     }
 
     private void update(float deltaTime) {
-
+        mainShip.update(deltaTime);
     }
 
     private void checkCollisions() {
