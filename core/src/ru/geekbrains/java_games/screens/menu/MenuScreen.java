@@ -53,6 +53,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
     protected void resize(Rect worldBounds) {
         background.resize(worldBounds);
         for (int i = 0; i < stars.length; i++) stars[i].resize(worldBounds);
+        buttonExit.resize(worldBounds);
     }
 
     @Override
