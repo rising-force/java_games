@@ -59,13 +59,13 @@ public class GameScreen extends Base2DScreen {
         background.resize(worldBounds);
         for (int i = 0; i < stars.length; i++) stars[i].resize(worldBounds);
         mainShip.resize(worldBounds);
-        Explosion explosion = explosionPool.obtain();
-        explosion.set(0.1f, worldBounds.pos);
     }
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
         mainShip.touchDown(touch, pointer);
+        Explosion explosion = explosionPool.obtain();
+        explosion.set(0.1f, touch);
     }
 
     @Override
