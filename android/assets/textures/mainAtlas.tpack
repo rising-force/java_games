@@ -10,21 +10,21 @@ explosion
   orig: 900, 900
   offset: 0, 0
   index: 0
-enemy1
+enemy2
   rotate: false
   xy: 916, 594
   size: 784, 338
   orig: 784, 338
   offset: 0, 0
   index: -1
-enemy2
+enemy0
   rotate: false
   xy: 1708, 623
   size: 332, 309
   orig: 332, 309
   offset: 0, 0
   index: -1
-enemy0
+enemy1
   rotate: false
   xy: 916, 338
   size: 440, 248
