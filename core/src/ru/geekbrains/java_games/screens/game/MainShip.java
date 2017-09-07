@@ -4,26 +4,30 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.geekbrains.java_games.Ship;
+import ru.geekbrains.java_games.pools.BulletPool;
 import ru.geekuniversity.engine.math.Rect;
-import ru.geekuniversity.engine.sprites.Sprite;
 
-class MainShip extends Sprite {
+class MainShip extends Ship {
 
     private static final float SHIP_HEIGHT = 0.15f;
     private static final float  BOTTOM_MARGIN = 0.05f;
 
-    private Rect worldBounds;
     private final Vector2 v0 = new Vector2(0.5f, 0f);
-    private final Vector2 v = new Vector2();
 
-    MainShip(TextureAtlas atlas) {
+    MainShip(TextureAtlas atlas, BulletPool bulletPool) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         setHeightProportion(SHIP_HEIGHT);
+        this.bulletPool = bulletPool;
+        bulletRegion = atlas.findRegion("bulletMainShip");
+        bulletHeight = 0.01f;
+        bulletV.set(0f, 0.5f);
+        bulletDamage = 1;
     }
 
     @Override
     public void resize(Rect worldBounds) {
-        this.worldBounds = worldBounds;
+        super.resize(worldBounds);
         setBottom(worldBounds.getBottom() + BOTTOM_MARGIN);
     }
 
@@ -73,7 +77,7 @@ class MainShip extends Sprite {
                 moveRight();
                 break;
             case Input.Keys.UP:
-                frame = 1;
+                shoot();
                 break;
         }
     }

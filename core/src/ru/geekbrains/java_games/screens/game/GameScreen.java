@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.java_games.Background;
+import ru.geekbrains.java_games.pools.BulletPool;
 import ru.geekbrains.java_games.screens.stars.TrackingStar;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Sprite2DTexture;
@@ -18,6 +19,8 @@ public class GameScreen extends Base2DScreen {
 
     private static final int STARS_COUNT = 50;
     private static final float STAR_HEIGHT = 0.01f;
+
+    private final BulletPool bulletPool = new BulletPool();
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
@@ -36,7 +39,7 @@ public class GameScreen extends Base2DScreen {
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
 
         background = new Background(new TextureRegion(textureBackground));
-        mainShip = new MainShip(atlas);
+        mainShip = new MainShip(atlas, bulletPool);
 
         TextureRegion starRegion = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {
@@ -86,6 +89,7 @@ public class GameScreen extends Base2DScreen {
 
     private void update(float deltaTime) {
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
+        bulletPool.updateActiveSprites(deltaTime);
         mainShip.update(deltaTime);
     }
 
@@ -94,7 +98,7 @@ public class GameScreen extends Base2DScreen {
     }
 
     private void deleteAllDestroyed() {
-
+        bulletPool.freeAllDestroyedActiveObjects();
     }
 
     private void draw() {
@@ -103,6 +107,7 @@ public class GameScreen extends Base2DScreen {
         batch.begin();
         background.draw(batch);
         for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
+        bulletPool.drawActiveObjects(batch);
         mainShip.draw(batch);
         batch.end();
     }
@@ -111,6 +116,7 @@ public class GameScreen extends Base2DScreen {
     public void dispose() {
         textureBackground.dispose();
         atlas.dispose();
+        bulletPool.dispose();
         super.dispose();
     }
 }
