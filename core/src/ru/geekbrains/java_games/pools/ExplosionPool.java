@@ -20,4 +20,9 @@ public class ExplosionPool extends SpritesPool<Explosion> {
     protected Explosion newObject() {
         return new Explosion(explosionRegion, 9, 9, 74);
     }
+
+    @Override
+    protected void debugLog() {
+        System.out.println("ExplosionPool change active/free: " + activeObjects.size() + "/" + freeObjects.size());
+    }
 }
