@@ -111,5 +111,17 @@ class MainShip extends Sprite {
     @Override
     public void update(float deltaTime) {
         pos.mulAdd(v, deltaTime);
+        if(getRight() > worldBounds.getRight()) {
+            setRight(worldBounds.getRight());
+            stop();
+        }
+        if(getLeft() < worldBounds.getLeft()) {
+            setLeft(worldBounds.getLeft());
+            stop();
+        }
+    }
+
+    Vector2 getV() {
+        return v;
     }
 }

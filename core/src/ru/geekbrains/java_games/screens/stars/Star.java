@@ -9,7 +9,7 @@ import ru.geekuniversity.engine.sprites.Sprite;
 
 public class Star extends Sprite {
 
-    private final Vector2 v = new Vector2();
+    final Vector2 v = new Vector2();
     private Rect worldBounds;
 
     public Star(TextureRegion region, float vx, float vy, float height) {
@@ -32,7 +32,7 @@ public class Star extends Sprite {
         checkAndHandleBounds();
     }
 
-    protected void checkAndHandleBounds() {
+    void checkAndHandleBounds() {
         if (getRight() < worldBounds.getLeft()) setLeft(worldBounds.getRight());
         if (getLeft() > worldBounds.getRight()) setRight(worldBounds.getLeft());
         if (getTop() < worldBounds.getBottom()) setBottom(worldBounds.getTop());
