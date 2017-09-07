@@ -31,6 +31,9 @@ public class Ship extends Sprite {
     protected final Vector2 bulletV = new Vector2();
     protected int bulletDamage;
 
+    protected float reloadInterval;
+    protected float reloadTimer;
+
     protected void shoot() {
         Bullet bullet = bulletPool.obtain();
         bullet.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, bulletDamage);

@@ -21,6 +21,7 @@ class MainShip extends Ship {
         this.bulletPool = bulletPool;
         bulletRegion = atlas.findRegion("bulletMainShip");
         bulletHeight = 0.01f;
+        reloadInterval = 0.15f;
         bulletV.set(0f, 0.5f);
         bulletDamage = 1;
     }
@@ -115,6 +116,11 @@ class MainShip extends Ship {
     @Override
     public void update(float deltaTime) {
         pos.mulAdd(v, deltaTime);
+        reloadTimer += deltaTime;
+        if(reloadTimer >= reloadInterval) {
+            reloadTimer = 0f;
+            shoot();
+        }
         if(getRight() > worldBounds.getRight()) {
             setRight(worldBounds.getRight());
             stop();
