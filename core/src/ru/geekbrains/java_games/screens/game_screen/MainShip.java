@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.java_games.common.Ship;
 import ru.geekbrains.java_games.common.bullets.BulletPool;
+import ru.geekbrains.java_games.common.explosions.ExplosionPool;
 import ru.geekuniversity.engine.math.Rect;
 
 class MainShip extends Ship {
@@ -15,10 +16,9 @@ class MainShip extends Ship {
 
     private final Vector2 v0 = new Vector2(0.5f, 0f);
 
-    MainShip(TextureAtlas atlas, BulletPool bulletPool) {
-        super(atlas.findRegion("main_ship"), 1, 2, 2);
+    MainShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
+        super(atlas.findRegion("main_ship"), 1, 2, 2, bulletPool, explosionPool, worldBounds);
         setHeightProportion(SHIP_HEIGHT);
-        this.bulletPool = bulletPool;
         bulletRegion = atlas.findRegion("bulletMainShip");
         bulletHeight = 0.01f;
         reloadInterval = 0.15f;
