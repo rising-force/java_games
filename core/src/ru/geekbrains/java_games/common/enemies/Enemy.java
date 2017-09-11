@@ -25,32 +25,32 @@ public class Enemy extends Ship {
         v.set(v0);
     }
 
-//    void set(
-//            TextureRegion[] regions,
-//            Vector2 v0,
-//            TextureRegion bulletRegion,
-//            float bulletHeight,
-//            float bulletVY,
-//            int bulletDamage,
-//            float reloadInterval,
-//            Sound soundShoot,
-//            float height,
-//            int hp
-//    ) {
-//        this.regions = regions;
-//        this.v0.set(v0);
-//        this.bulletRegion = bulletRegion;
-//        this.bulletHeight = bulletHeight;
-//        this.bulletV.set(0f, bulletVY);
-//        this.bulletDamage = bulletDamage;
-//        this.reloadInterval = reloadInterval;
-//        this.bulletSound = soundShoot;
-//        this.hp = hp;
-//        setHeightProportion(height);
-//        reloadTimer = reloadInterval;
-//        v.set(descentV);
+    void set(
+            TextureRegion[] regions,
+            Vector2 v0,
+            TextureRegion bulletRegion,
+            float bulletHeight,
+            float bulletVY,
+            int bulletDamage,
+            float reloadInterval,
+            Sound soundShoot,
+            float height,
+            int hp
+    ) {
+        this.regions = regions;
+        this.v0.set(v0);
+        this.bulletRegion = bulletRegion;
+        this.bulletHeight = bulletHeight;
+        this.bulletV.set(0f, bulletVY);
+        this.bulletDamage = bulletDamage;
+        this.reloadInterval = reloadInterval;
+        this.bulletSound = soundShoot;
+        this.hp = hp;
+        setHeightProportion(height);
+        reloadTimer = reloadInterval;
+        v.set(v0);
 //        state = State.DESCENT;
-//    }
+    }
 
 //    @Override
 //    public void update(float deltaTime) {

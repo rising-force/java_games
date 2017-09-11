@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.java_games.common.Background;
+import ru.geekbrains.java_games.common.enemies.EnemiesEmitter;
+import ru.geekbrains.java_games.common.enemies.EnemyPool;
 import ru.geekbrains.java_games.common.explosions.Explosion;
 import ru.geekbrains.java_games.common.bullets.BulletPool;
 import ru.geekbrains.java_games.common.explosions.ExplosionPool;
@@ -24,14 +26,16 @@ public class GameScreen extends Base2DScreen {
     private static final int STARS_COUNT = 50;
     private static final float STAR_HEIGHT = 0.01f;
 
-    private final BulletPool bulletPool = new BulletPool();
+    private BulletPool bulletPool;
     private ExplosionPool explosionPool;
+    private EnemyPool enemyPool;
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
     private Background background;
     private final TrackingStar[] stars = new TrackingStar[STARS_COUNT];
     private MainShip mainShip;
+    EnemiesEmitter enemiesEmitter;
 
     private Music music;
     private Sound sndLaser;
@@ -54,11 +58,14 @@ public class GameScreen extends Base2DScreen {
         textureBackground = new Sprite2DTexture("textures/bg.png");
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
 
+        bulletPool = new BulletPool();
         explosionPool = new ExplosionPool(atlas, sndExplosion);
+        mainShip = new MainShip(atlas, bulletPool, explosionPool, worldBounds, sndLaser);
+        enemyPool = new EnemyPool(bulletPool, explosionPool, worldBounds, mainShip);
+
+        enemiesEmitter = new EnemiesEmitter(enemyPool, worldBounds, atlas, sndBullet);
 
         background = new Background(new TextureRegion(textureBackground));
-        mainShip = new MainShip(atlas, bulletPool, explosionPool, worldBounds, sndLaser);
-
         TextureRegion starRegion = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {
             float vx = Rnd.nextFloat(-0.005f, 0.005f);
@@ -123,6 +130,7 @@ public class GameScreen extends Base2DScreen {
 //            randomBoomPos.y = Rnd.nextFloat(worldBounds.getBottom(), worldBounds.getTop());
 //            explosion.set(0.1f, randomBoomPos);
 //        }
+        enemiesEmitter.generateEnemies(deltaTime);
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
         bulletPool.updateActiveSprites(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);

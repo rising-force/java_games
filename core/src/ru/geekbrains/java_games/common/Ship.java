@@ -21,7 +21,7 @@ public class Ship extends Sprite {
     protected TextureRegion bulletRegion;
     protected Sound bulletSound;
 //    protected final ExplosionPool explosionPool;
-//    protected int hp;
+    protected int hp;
 
     protected Ship(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
         this.bulletPool = bulletPool;
