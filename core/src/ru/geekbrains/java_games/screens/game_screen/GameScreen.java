@@ -57,7 +57,7 @@ public class GameScreen extends Base2DScreen {
         explosionPool = new ExplosionPool(atlas, sndExplosion);
 
         background = new Background(new TextureRegion(textureBackground));
-        mainShip = new MainShip(atlas, bulletPool, explosionPool, worldBounds);
+        mainShip = new MainShip(atlas, bulletPool, explosionPool, worldBounds, sndLaser);
 
         TextureRegion starRegion = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {
@@ -81,8 +81,8 @@ public class GameScreen extends Base2DScreen {
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
         mainShip.touchDown(touch, pointer);
-        Explosion explosion = explosionPool.obtain();
-        explosion.set(0.1f, touch);
+//        Explosion explosion = explosionPool.obtain();
+//        explosion.set(0.1f, touch);
     }
 
     @Override

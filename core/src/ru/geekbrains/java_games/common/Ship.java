@@ -19,20 +19,22 @@ public class Ship extends Sprite {
 
     protected final BulletPool bulletPool;
     protected TextureRegion bulletRegion;
-//    protected Sound bulletSound;
+    protected final Sound bulletSound;
 //    protected final ExplosionPool explosionPool;
 //    protected int hp;
 
-    protected Ship(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
+    protected Ship(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds, Sound bulletSound) {
         this.bulletPool = bulletPool;
 //        this.explosionPool = explosionPool;
+        this.bulletSound = bulletSound;
         this.worldBounds = worldBounds;
     }
 
-    public Ship(TextureRegion region, int rows, int cols, int frames, BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
+    public Ship(TextureRegion region, int rows, int cols, int frames, BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds, Sound bulletSound) {
         super(region, rows, cols, frames);
         this.bulletPool = bulletPool;
 //        this.explosionPool = explosionPool;
+        this.bulletSound = bulletSound;
         this.worldBounds = worldBounds;
     }
 
@@ -65,7 +67,7 @@ public class Ship extends Sprite {
     protected void shoot() {
         Bullet bullet = bulletPool.obtain();
         bullet.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, bulletDamage);
-//        if(bulletSound.play() == -1) throw new RuntimeException();
+        if(bulletSound.play() == -1) throw new RuntimeException();
     }
 
 //    public void boom() {
