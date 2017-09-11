@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games.screens.stars;
+package ru.geekbrains.java_games.common.stars;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;

@@ -1,6 +1,6 @@
-package ru.geekbrains.java_games.pools;
+package ru.geekbrains.java_games.common.bullets;
 
-import ru.geekbrains.java_games.Bullet;
+import ru.geekbrains.java_games.common.bullets.Bullet;
 import ru.geekuniversity.engine.pool.SpritesPool;
 
 public class BulletPool extends SpritesPool<Bullet> {

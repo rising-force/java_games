@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games;
+package ru.geekbrains.java_games.common.explosions;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

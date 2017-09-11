@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games.screens.game;
+package ru.geekbrains.java_games.screens.game_screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import ru.geekbrains.java_games.Background;
-import ru.geekbrains.java_games.Explosion;
-import ru.geekbrains.java_games.pools.BulletPool;
-import ru.geekbrains.java_games.pools.ExplosionPool;
-import ru.geekbrains.java_games.screens.stars.TrackingStar;
+import ru.geekbrains.java_games.common.Background;
+import ru.geekbrains.java_games.common.explosions.Explosion;
+import ru.geekbrains.java_games.common.bullets.BulletPool;
+import ru.geekbrains.java_games.common.explosions.ExplosionPool;
+import ru.geekbrains.java_games.common.stars.TrackingStar;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;

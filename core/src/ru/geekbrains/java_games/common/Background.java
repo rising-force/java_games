@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games;
+package ru.geekbrains.java_games.common;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

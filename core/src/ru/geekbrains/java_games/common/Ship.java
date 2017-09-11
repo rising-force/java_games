@@ -1,10 +1,10 @@
-package ru.geekbrains.java_games;
+package ru.geekbrains.java_games.common;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import ru.geekbrains.java_games.pools.BulletPool;
+import ru.geekbrains.java_games.common.bullets.Bullet;
+import ru.geekbrains.java_games.common.bullets.BulletPool;
 import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.sprites.Sprite;
 

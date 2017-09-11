@@ -1,4 +1,4 @@
-package ru.geekbrains.java_games.screens.menu;
+package ru.geekbrains.java_games.screens.menu_screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-import ru.geekbrains.java_games.screens.game.GameScreen;
-import ru.geekbrains.java_games.screens.stars.Star;
+import ru.geekbrains.java_games.common.Background;
+import ru.geekbrains.java_games.screens.game_screen.GameScreen;
+import ru.geekbrains.java_games.screens.menu_screen.ui.ButtonExit;
+import ru.geekbrains.java_games.screens.menu_screen.ui.ButtonNewGame;
+import ru.geekbrains.java_games.common.stars.Star;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;
@@ -26,7 +29,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
-    private ru.geekbrains.java_games.Background background;
+    private Background background;
     private final Star[] stars = new Star[STARS_COUNT];
     private ButtonExit buttonExit;
     private ButtonNewGame buttonNewGame;
@@ -41,7 +44,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         super.show();
         textureBackground = new Sprite2DTexture("textures/bg.png");
         atlas = new TextureAtlas("textures/menuAtlas.tpack");
-        background = new ru.geekbrains.java_games.Background(new TextureRegion(textureBackground));
+        background = new Background(new TextureRegion(textureBackground));
         TextureRegion regionStar = atlas.findRegion("star");
         for (int i = 0; i < stars.length; i++) {
             float vx = Rnd.nextFloat(-0.005f, 0.005f);
