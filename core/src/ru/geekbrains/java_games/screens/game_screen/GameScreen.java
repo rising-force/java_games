@@ -33,8 +33,10 @@ public class GameScreen extends Base2DScreen {
     private final TrackingStar[] stars = new TrackingStar[STARS_COUNT];
     private MainShip mainShip;
 
-    private Sound sndExplosion;
     private Music music;
+    private Sound sndLaser;
+    private Sound sndBullet;
+    private Sound sndExplosion;
 
     public GameScreen(Game game) {
         super(game);
@@ -43,10 +45,15 @@ public class GameScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        sndBullet = Gdx.audio.newSound(Gdx.files.internal("sounds/bullet.wav"));
+        sndLaser = Gdx.audio.newSound(Gdx.files.internal("sounds/laser.wav"));
+        sndExplosion = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
+
         textureBackground = new Sprite2DTexture("textures/bg.png");
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
 
-        sndExplosion = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
         explosionPool = new ExplosionPool(atlas, sndExplosion);
 
         background = new Background(new TextureRegion(textureBackground));
@@ -60,7 +67,6 @@ public class GameScreen extends Base2DScreen {
             stars[i] = new TrackingStar(starRegion, vx, vy, starHeight, mainShip.getV());
         }
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
         music.setLooping(true);
         music.play();
     }
@@ -146,12 +152,15 @@ public class GameScreen extends Base2DScreen {
 
     @Override
     public void dispose() {
+        music.dispose();
+        sndBullet.dispose();
+        sndLaser.dispose();
+        sndExplosion.dispose();
+
+        bulletPool.dispose();
         explosionPool.dispose();
         textureBackground.dispose();
         atlas.dispose();
-        bulletPool.dispose();
-        sndExplosion.dispose();
-        music.dispose();
         super.dispose();
     }
 }
