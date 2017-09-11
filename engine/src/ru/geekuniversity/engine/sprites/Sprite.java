@@ -45,10 +45,10 @@ public class Sprite extends Rect {
     }
 
     public void update(float deltaTime) {
-
     }
 
     public void draw(SpriteBatch batch) {
+        if(isDestroyed) return;
         batch.draw(
                 regions[frame],
                 getLeft(), getBottom(),
