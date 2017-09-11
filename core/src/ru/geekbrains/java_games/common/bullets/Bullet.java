@@ -13,7 +13,7 @@ public class Bullet extends Sprite {
     private int damage;
     private Object owner;
 
-    public Bullet() {
+    Bullet() {
         regions = new TextureRegion[1];
     }
 

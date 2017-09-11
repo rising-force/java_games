@@ -6,9 +6,9 @@ import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.ui.ActionListener;
 import ru.geekuniversity.engine.ui.ScaledTouchUpButton;
 
-class ButtonNewGame extends ScaledTouchUpButton {
+public class ButtonNewGame extends ScaledTouchUpButton {
 
-    ButtonNewGame(TextureAtlas atlas, ActionListener listener, float pressScale) {
+    public ButtonNewGame(TextureAtlas atlas, ActionListener listener, float pressScale) {
         super(atlas.findRegion("btPlay"), listener, pressScale);
     }
 

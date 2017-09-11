@@ -4,7 +4,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import ru.geekbrains.java_games.common.explosions.Explosion;
 import ru.geekuniversity.engine.pool.SpritesPool;
 
 public class ExplosionPool extends SpritesPool<Explosion> {

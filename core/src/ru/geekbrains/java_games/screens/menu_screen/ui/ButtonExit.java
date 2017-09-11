@@ -6,9 +6,9 @@ import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.ui.ActionListener;
 import ru.geekuniversity.engine.ui.ScaledTouchUpButton;
 
-class ButtonExit extends ScaledTouchUpButton {
+public class ButtonExit extends ScaledTouchUpButton {
 
-    ButtonExit(TextureAtlas atlas, ActionListener listener, float pressScale) {
+    public ButtonExit(TextureAtlas atlas, ActionListener listener, float pressScale) {
         super(atlas.findRegion("btExit"), listener, pressScale);
     }
 
