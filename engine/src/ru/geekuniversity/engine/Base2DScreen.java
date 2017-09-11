@@ -12,15 +12,16 @@ import com.badlogic.gdx.math.Vector2;
 import ru.geekuniversity.engine.math.MatrixUtils;
 import ru.geekuniversity.engine.math.Rect;
 
+@SuppressWarnings({"WeakerAccess", "UnusedParameters"})
 public class Base2DScreen implements Screen, InputProcessor {
 
-    private static final float WORLD_HEIGHT = 1f;
+    protected static final float WORLD_HEIGHT = 1f;
 
     protected final Game game;
 
-    private final Rect screenBounds = new Rect(); //граница области рисования в px
-    private final Rect worldBounds = new Rect();  //желаемые граница проекции мировых координат
-    private final Rect glBounds = new Rect(0f, 0f, 1f, 1f); //дефолтные границы проекции мир - gl
+    protected final Rect screenBounds = new Rect(); //граница области рисования в px
+    protected final Rect worldBounds = new Rect();  //желаемые граница проекции мировых координат
+    protected final Rect glBounds = new Rect(0f, 0f, 1f, 1f); //дефолтные границы проекции мир - gl
 
     /**
      * Эта матрица используется SpriteBatch.
@@ -44,7 +45,7 @@ public class Base2DScreen implements Screen, InputProcessor {
 
     @Override
     public void show() {
-        System.out.println("show");
+        System.out.println("Screen show()");
         Gdx.input.setInputProcessor(this);
         if(batch != null) throw new RuntimeException("batch != null, повторная установка screen без dispose");
         batch = new SpriteBatch();
@@ -52,7 +53,7 @@ public class Base2DScreen implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        System.out.println("resize: width = " + width + " height = " + height);
+        System.out.println("Screen resize(" + width + ", " + height + ")");
         screenBounds.setSize(width, height);
         screenBounds.setLeft(0);
         screenBounds.setBottom(0);
@@ -78,23 +79,23 @@ public class Base2DScreen implements Screen, InputProcessor {
 
     @Override
     public void pause() {
-        System.out.println("pause");
+        System.out.println("Screen pause()");
     }
 
     @Override
     public void resume() {
-        System.out.println("resume");
+        System.out.println("Screen resume()");
     }
 
     @Override
     public void hide() {
-        System.out.println("hide");
+        System.out.println("Screen hide()");
         dispose();
     }
 
     @Override
     public void dispose() {
-        System.out.println("dispose");
+        System.out.println("Screen dispose()");
         batch.dispose();
         batch = null;
     }

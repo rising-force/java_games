@@ -12,8 +12,8 @@ public class Star extends Sprite {
     final Vector2 v = new Vector2();
     private Rect worldBounds;
 
-    public Star(TextureRegion region, float vx, float vy, float height) {
-        super(region);
+    public Star(TextureRegion textureRegion, float vx, float vy, float height) {
+        super(textureRegion);
         v.set(vx, vy);
         setHeightProportion(height);
     }
