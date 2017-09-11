@@ -131,6 +131,7 @@ public class GameScreen extends Base2DScreen {
 //            explosion.set(0.1f, randomBoomPos);
 //        }
         enemiesEmitter.generateEnemies(deltaTime);
+        enemyPool.updateActiveSprites(deltaTime);
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
         bulletPool.updateActiveSprites(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);
@@ -153,6 +154,7 @@ public class GameScreen extends Base2DScreen {
         background.draw(batch);
         for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
         bulletPool.drawActiveObjects(batch);
+        enemyPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
         mainShip.draw(batch);
         batch.end();
