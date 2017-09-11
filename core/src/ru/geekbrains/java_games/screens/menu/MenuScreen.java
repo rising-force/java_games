@@ -2,6 +2,7 @@ package ru.geekbrains.java_games.screens.menu;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,6 +30,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
     private final Star[] stars = new Star[STARS_COUNT];
     private ButtonExit buttonExit;
     private ButtonNewGame buttonNewGame;
+    private Music music;
 
     public MenuScreen(Game game) {
         super(game);
@@ -51,6 +53,10 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
         buttonNewGame.setHeightProportion(BUTTONS_HEIGHT);
         buttonExit = new ButtonExit(atlas, this, BUTTONS_PRESS_SCALE);
         buttonExit.setHeightProportion(BUTTONS_HEIGHT);
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
@@ -109,6 +115,7 @@ public class MenuScreen extends Base2DScreen implements ActionListener {
     public void dispose () {
         textureBackground.dispose();
         atlas.dispose();
+        music.dispose();
         super.dispose();
     }
 }

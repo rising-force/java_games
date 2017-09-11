@@ -2,6 +2,7 @@ package ru.geekbrains.java_games.screens.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -33,6 +34,7 @@ public class GameScreen extends Base2DScreen {
     private MainShip mainShip;
 
     private Sound sndExplosion;
+    private Music music;
 
     public GameScreen(Game game) {
         super(game);
@@ -57,6 +59,10 @@ public class GameScreen extends Base2DScreen {
             float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
             stars[i] = new TrackingStar(starRegion, vx, vy, starHeight, mainShip.getV());
         }
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        music.setLooping(true);
+        music.play();
     }
 
     @Override
@@ -98,7 +104,19 @@ public class GameScreen extends Base2DScreen {
         draw();
     }
 
+    private float randomBoomInterval = 3f;
+    private float randomBoomTimer;
+    private final Vector2 randomBoomPos = new Vector2();
+
     private void update(float deltaTime) {
+        randomBoomTimer += deltaTime;
+        if(randomBoomTimer >= randomBoomInterval) {
+            randomBoomTimer = 0f;
+            Explosion explosion = explosionPool.obtain();
+            randomBoomPos.x = Rnd.nextFloat(worldBounds.getLeft(), worldBounds.getRight());
+            randomBoomPos.y = Rnd.nextFloat(worldBounds.getBottom(), worldBounds.getTop());
+            explosion.set(0.1f, randomBoomPos);
+        }
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
         bulletPool.updateActiveSprites(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);
@@ -133,6 +151,7 @@ public class GameScreen extends Base2DScreen {
         atlas.dispose();
         bulletPool.dispose();
         sndExplosion.dispose();
+        music.dispose();
         super.dispose();
     }
 }
