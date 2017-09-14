@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.StringBuilder;
 
 import java.util.ArrayList;
 
@@ -103,7 +102,7 @@ public class GameScreen extends Base2DScreen implements ActionListener {
     }
 
     private void startNewGame() {
-        state = State.GAME_OVER;
+        state = State.PLAYING;
         frags = 0;
         mainShip.setToNewGame();
         enemiesEmitter.setToNewGame();
@@ -130,43 +129,61 @@ public class GameScreen extends Base2DScreen implements ActionListener {
 
     @Override
     protected void touchDown(Vector2 touch, int pointer) {
-        mainShip.touchDown(touch, pointer);
-        buttonNewGame.touchDown(touch, pointer);
+        switch (state) {
+            case PLAYING:
+                mainShip.touchDown(touch, pointer);
+                break;
+            case GAME_OVER:
+                buttonNewGame.touchDown(touch, pointer);
+                break;
+            default:
+                throw new RuntimeException("Unknown state = " + state);
+        }
     }
 
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
-        mainShip.touchUp(touch, pointer);
-        buttonNewGame.touchUp(touch, pointer);
+        switch (state) {
+            case PLAYING:
+                mainShip.touchUp(touch, pointer);
+                break;
+            case GAME_OVER:
+                buttonNewGame.touchUp(touch, pointer);
+                break;
+            default:
+                throw new RuntimeException("Unknown state = " + state);
+        }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        mainShip.keyDown(keycode);
+        if(state == State.PLAYING) mainShip.keyDown(keycode);
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        mainShip.keyUp(keycode);
+        if(state == State.PLAYING) mainShip.keyUp(keycode);
         return false;
     }
 
     @Override
     public void render(float delta) {
         update(delta);
-        checkCollisions();
+        if(state == State.PLAYING) checkCollisions();
         deleteAllDestroyed();
         draw();
     }
 
     private void update(float deltaTime) {
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
-        enemiesEmitter.generateEnemies(deltaTime);
-        bulletPool.updateActiveSprites(deltaTime);
-        enemyPool.updateActiveSprites(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);
-        mainShip.update(deltaTime);
+        if(state == State.PLAYING) {
+            enemiesEmitter.generateEnemies(deltaTime);
+            bulletPool.updateActiveSprites(deltaTime);
+            enemyPool.updateActiveSprites(deltaTime);
+            mainShip.update(deltaTime);
+        }
     }
 
     private void checkCollisions() {
@@ -234,8 +251,10 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         explosionPool.drawActiveObjects(batch);
         mainShip.draw(batch);
         printInfo();
-        messageGameOver.draw(batch);
-        buttonNewGame.draw(batch);
+        if(state == State.GAME_OVER) {
+            messageGameOver.draw(batch);
+            buttonNewGame.draw(batch);
+        }
         batch.end();
     }
 
