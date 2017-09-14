@@ -22,11 +22,17 @@ public class MainShip extends Ship {
         bulletRegion = atlas.findRegion("bulletMainShip");
         this.bulletSound = bulletSound;
         setHeightProportion(SHIP_HEIGHT);
+        setToNewGame();
+    }
 
+    void setToNewGame() {
+        pos.x = worldBounds.pos.x;
         bulletHeight = 0.01f;
         reloadInterval = 0.15f;
         bulletV.set(0f, 0.5f);
         bulletDamage = 1;
+        hp = 100;
+        flushDestroy();
     }
 
     @Override

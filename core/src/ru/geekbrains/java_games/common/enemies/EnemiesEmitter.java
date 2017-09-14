@@ -63,6 +63,10 @@ public class EnemiesEmitter {
         bulletRegion = atlas.findRegion("bulletEnemy");
     }
 
+    public void setToNewGame() {
+        stage = 1;
+    }
+
     public int getStage() {
         return stage;
     }

@@ -34,6 +34,9 @@ public class GameScreen extends Base2DScreen {
     private static final float STAR_HEIGHT = 0.01f;
     private static final float FONT_SIZE = 0.02f;
 
+    private enum State { PLAYING, GAME_OVER }
+
+    private State state;
     private BulletPool bulletPool;
     private ExplosionPool explosionPool;
     private EnemyPool enemyPool;
@@ -88,6 +91,17 @@ public class GameScreen extends Base2DScreen {
 
         music.setLooping(true);
         music.play();
+        startNewGame();
+    }
+
+    private void startNewGame() {
+        state = State.GAME_OVER;
+        frags = 0;
+        mainShip.setToNewGame();
+        enemiesEmitter.setToNewGame();
+        bulletPool.freeAllActiveObjects();
+        enemyPool.freeAllActiveObjects();
+        enemyPool.freeAllActiveObjects();
     }
 
     @Override
@@ -151,8 +165,8 @@ public class GameScreen extends Base2DScreen {
             if(enemy.pos.dst2(mainShip.pos) < minDist * minDist) {
                 enemy.boom();
                 enemy.destroy();
-//                mainShip.boom();
-//                mainShip.destroy();
+                mainShip.boom();
+                mainShip.destroy();
 //                state = State.GAME_OVER;
                 return;
             }
