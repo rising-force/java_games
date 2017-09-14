@@ -20,6 +20,7 @@ import ru.geekbrains.java_games.common.enemies.EnemyPool;
 import ru.geekbrains.java_games.common.explosions.ExplosionPool;
 import ru.geekbrains.java_games.common.stars.TrackingStar;
 import ru.geekuniversity.engine.Base2DScreen;
+import ru.geekuniversity.engine.Font;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.math.Rnd;
@@ -35,6 +36,7 @@ public class GameScreen extends Base2DScreen {
 
     private Sprite2DTexture textureBackground;
     private TextureAtlas atlas;
+    private Font font;
     private Background background;
     private final TrackingStar[] stars = new TrackingStar[STARS_COUNT];
     private MainShip mainShip;
@@ -76,6 +78,9 @@ public class GameScreen extends Base2DScreen {
             float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
             stars[i] = new TrackingStar(starRegion, vx, vy, starHeight, mainShip.getV());
         }
+
+        font = new Font("fonts/font.fnt", "fonts/font.png");
+        font.setWorldSize(1f);
 
         music.setLooping(true);
         music.play();
@@ -193,6 +198,7 @@ public class GameScreen extends Base2DScreen {
         enemyPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
         mainShip.draw(batch);
+        font.draw(batch, "H", worldBounds.getLeft(), worldBounds.getTop());
         batch.end();
     }
 
@@ -209,6 +215,7 @@ public class GameScreen extends Base2DScreen {
         explosionPool.dispose();
         textureBackground.dispose();
         atlas.dispose();
+        font.dispose();
         super.dispose();
     }
 }
