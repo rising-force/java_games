@@ -21,15 +21,17 @@ import ru.geekbrains.java_games.common.enemies.Enemy;
 import ru.geekbrains.java_games.common.enemies.EnemyPool;
 import ru.geekbrains.java_games.common.explosions.ExplosionPool;
 import ru.geekbrains.java_games.common.stars.TrackingStar;
+import ru.geekbrains.java_games.screens.game_screen.ui.ButtonNewGame;
 import ru.geekbrains.java_games.screens.game_screen.ui.MessageGameOver;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Font;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.math.Rnd;
+import ru.geekuniversity.engine.ui.ActionListener;
 import ru.geekuniversity.engine.utils.StrBuilder;
 
-public class GameScreen extends Base2DScreen {
+public class GameScreen extends Base2DScreen implements ActionListener {
 
     private static final int STARS_COUNT = 50;
     private static final float STAR_HEIGHT = 0.01f;
@@ -49,6 +51,7 @@ public class GameScreen extends Base2DScreen {
     private final TrackingStar[] stars = new TrackingStar[STARS_COUNT];
     private MainShip mainShip;
     private MessageGameOver messageGameOver;
+    private ButtonNewGame buttonNewGame;
     private EnemiesEmitter enemiesEmitter;
 
     private Music music;
@@ -89,6 +92,7 @@ public class GameScreen extends Base2DScreen {
         }
 
         messageGameOver = new MessageGameOver(atlas);
+        buttonNewGame = new ButtonNewGame(atlas, this);
 
         font = new Font("fonts/font.fnt", "fonts/font.png");
         font.setWorldSize(FONT_SIZE);
@@ -116,15 +120,24 @@ public class GameScreen extends Base2DScreen {
     }
 
     @Override
+    public void actionPerformed(Object src) {
+        if(src == buttonNewGame) {
+            startNewGame();
+        } else {
+            throw new RuntimeException("Unknown src = " + src);
+        }
+    }
+
+    @Override
     protected void touchDown(Vector2 touch, int pointer) {
         mainShip.touchDown(touch, pointer);
-//        Explosion explosion = explosionPool.obtain();
-//        explosion.set(0.1f, touch);
+        buttonNewGame.touchDown(touch, pointer);
     }
 
     @Override
     protected void touchUp(Vector2 touch, int pointer) {
         mainShip.touchUp(touch, pointer);
+        buttonNewGame.touchUp(touch, pointer);
     }
 
     @Override
@@ -222,6 +235,7 @@ public class GameScreen extends Base2DScreen {
         mainShip.draw(batch);
         printInfo();
         messageGameOver.draw(batch);
+        buttonNewGame.draw(batch);
         batch.end();
     }
 
