@@ -122,6 +122,9 @@ public class MainShip extends Ship {
         v.setZero();
     }
 
+    private final float hpRegenInterval = 1f;
+    private float hpRegenTimer;
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -129,6 +132,11 @@ public class MainShip extends Ship {
         if(reloadTimer >= reloadInterval) {
             reloadTimer = 0f;
             shoot();
+        }
+        hpRegenTimer += deltaTime;
+        if(hpRegenTimer >= hpRegenInterval) {
+            hpRegenTimer = 0f;
+            if(hp < 100) hp++;
         }
 
         if(getRight() > worldBounds.getRight()) {
