@@ -132,15 +132,15 @@ public class GameScreen extends Base2DScreen {
     private void checkCollisions() {
         ArrayList<Enemy> enemies = enemyPool.getActiveObjects();
         final int enemyCount = enemies.size();
-//        ArrayList<Bullet> bullets = bulletPool.getActiveObjects();
-//        final int bulletCount = bullets.size();
+        ArrayList<Bullet> bullets = bulletPool.getActiveObjects();
+        final int bulletCount = bullets.size();
 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = enemies.get(i);
             if(enemy.isDestroyed()) continue;
             float minDist = enemy.getHalfWidth() + mainShip.getHalfWidth();
             if(enemy.pos.dst2(mainShip.pos) < minDist * minDist) {
-//                enemy.boom();
+                enemy.boom();
                 enemy.destroy();
 //                mainShip.boom();
 //                mainShip.destroy();
@@ -149,6 +149,18 @@ public class GameScreen extends Base2DScreen {
             }
         }
 
+        for (int i = 0; i < enemyCount; i++) {
+            Enemy enemy = enemies.get(i);
+            if(enemy.isDestroyed()) continue;
+            for (int j = 0; j < bulletCount; j++) {
+                Bullet bullet = bullets.get(j);
+                if(bullet.getOwner() != mainShip || bullet.isDestroyed()) continue;
+                if(!bullet.isOutside(enemy)) {
+                    enemy.damage(bullet.getDamage());
+                    bullet.destroy();
+                }
+            }
+        }
     }
 
     private void deleteAllDestroyed() {
