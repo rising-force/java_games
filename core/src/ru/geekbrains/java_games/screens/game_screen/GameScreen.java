@@ -21,6 +21,7 @@ import ru.geekbrains.java_games.common.enemies.Enemy;
 import ru.geekbrains.java_games.common.enemies.EnemyPool;
 import ru.geekbrains.java_games.common.explosions.ExplosionPool;
 import ru.geekbrains.java_games.common.stars.TrackingStar;
+import ru.geekbrains.java_games.screens.game_screen.ui.MessageGameOver;
 import ru.geekuniversity.engine.Base2DScreen;
 import ru.geekuniversity.engine.Font;
 import ru.geekuniversity.engine.Sprite2DTexture;
@@ -47,7 +48,8 @@ public class GameScreen extends Base2DScreen {
     private Background background;
     private final TrackingStar[] stars = new TrackingStar[STARS_COUNT];
     private MainShip mainShip;
-    EnemiesEmitter enemiesEmitter;
+    private MessageGameOver messageGameOver;
+    private EnemiesEmitter enemiesEmitter;
 
     private Music music;
     private Sound sndLaser;
@@ -85,6 +87,8 @@ public class GameScreen extends Base2DScreen {
             float starHeight = STAR_HEIGHT * Rnd.nextFloat(0.75f, 1f);
             stars[i] = new TrackingStar(starRegion, vx, vy, starHeight, mainShip.getV());
         }
+
+        messageGameOver = new MessageGameOver(atlas);
 
         font = new Font("fonts/font.fnt", "fonts/font.png");
         font.setWorldSize(FONT_SIZE);
@@ -217,6 +221,7 @@ public class GameScreen extends Base2DScreen {
         explosionPool.drawActiveObjects(batch);
         mainShip.draw(batch);
         printInfo();
+        messageGameOver.draw(batch);
         batch.end();
     }
 
