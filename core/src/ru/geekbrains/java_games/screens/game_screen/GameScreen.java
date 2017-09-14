@@ -179,10 +179,14 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);
         if(state == State.PLAYING) {
+            mainShip.update(deltaTime);
             enemiesEmitter.generateEnemies(deltaTime);
             bulletPool.updateActiveSprites(deltaTime);
             enemyPool.updateActiveSprites(deltaTime);
-            mainShip.update(deltaTime);
+            if(mainShip.isDestroyed()) {
+                mainShip.boom();
+                state = State.GAME_OVER;
+            }
         }
     }
 
@@ -201,19 +205,24 @@ public class GameScreen extends Base2DScreen implements ActionListener {
                 enemy.destroy();
                 mainShip.boom();
                 mainShip.destroy();
-//                state = State.GAME_OVER;
+                state = State.GAME_OVER;
                 return;
             }
         }
 
-//        for (int i = 0; i < bulletCount; i++) {
-//            Bullet bullet = bullets.get(i);
-//            if(bullet.isDestroyed() || bullet.getOwner() == mainShip) continue;
-//            if(mainShip.isBulletCollision(bullet)) {
-//                mainShip.damage(bullet.getDamage());
-//                bullet.destroy();
-//            }
-//        }
+        for (int i = 0; i < bulletCount; i++) {
+            Bullet bullet = bullets.get(i);
+            if(bullet.isDestroyed() || bullet.getOwner() == mainShip) continue;
+            if(mainShip.isBulletCollision(bullet)) {
+                mainShip.damage(bullet.getDamage());
+                bullet.destroy();
+                if(mainShip.isDestroyed()) {
+                    mainShip.boom();
+                    state = State.GAME_OVER;
+                    return;
+                }
+            }
+        }
 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = enemies.get(i);
