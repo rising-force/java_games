@@ -9,11 +9,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+
 import ru.geekbrains.java_games.common.Background;
-import ru.geekbrains.java_games.common.enemies.EnemiesEmitter;
-import ru.geekbrains.java_games.common.enemies.EnemyPool;
-import ru.geekbrains.java_games.common.explosions.Explosion;
+import ru.geekbrains.java_games.common.bullets.Bullet;
 import ru.geekbrains.java_games.common.bullets.BulletPool;
+import ru.geekbrains.java_games.common.enemies.EnemiesEmitter;
+import ru.geekbrains.java_games.common.enemies.Enemy;
+import ru.geekbrains.java_games.common.enemies.EnemyPool;
 import ru.geekbrains.java_games.common.explosions.ExplosionPool;
 import ru.geekbrains.java_games.common.stars.TrackingStar;
 import ru.geekuniversity.engine.Base2DScreen;
@@ -117,33 +120,40 @@ public class GameScreen extends Base2DScreen {
         draw();
     }
 
-//    private float randomBoomInterval = 3f;
-//    private float randomBoomTimer;
-//    private final Vector2 randomBoomPos = new Vector2();
-
     private void update(float deltaTime) {
-//        randomBoomTimer += deltaTime;
-//        if(randomBoomTimer >= randomBoomInterval) {
-//            randomBoomTimer = 0f;
-//            Explosion explosion = explosionPool.obtain();
-//            randomBoomPos.x = Rnd.nextFloat(worldBounds.getLeft(), worldBounds.getRight());
-//            randomBoomPos.y = Rnd.nextFloat(worldBounds.getBottom(), worldBounds.getTop());
-//            explosion.set(0.1f, randomBoomPos);
-//        }
-        enemiesEmitter.generateEnemies(deltaTime);
-        enemyPool.updateActiveSprites(deltaTime);
         for (int i = 0; i < stars.length; i++) stars[i].update(deltaTime);
+        enemiesEmitter.generateEnemies(deltaTime);
         bulletPool.updateActiveSprites(deltaTime);
+        enemyPool.updateActiveSprites(deltaTime);
         explosionPool.updateActiveSprites(deltaTime);
         mainShip.update(deltaTime);
     }
 
     private void checkCollisions() {
+        ArrayList<Enemy> enemies = enemyPool.getActiveObjects();
+        final int enemyCount = enemies.size();
+//        ArrayList<Bullet> bullets = bulletPool.getActiveObjects();
+//        final int bulletCount = bullets.size();
+
+        for (int i = 0; i < enemyCount; i++) {
+            Enemy enemy = enemies.get(i);
+            if(enemy.isDestroyed()) continue;
+            float minDist = enemy.getHalfWidth() + mainShip.getHalfWidth();
+            if(enemy.pos.dst2(mainShip.pos) < minDist * minDist) {
+//                enemy.boom();
+                enemy.destroy();
+//                mainShip.boom();
+//                mainShip.destroy();
+//                state = State.GAME_OVER;
+                return;
+            }
+        }
 
     }
 
     private void deleteAllDestroyed() {
         bulletPool.freeAllDestroyedActiveObjects();
+        enemyPool.freeAllDestroyedActiveObjects();
         explosionPool.freeAllDestroyedActiveObjects();
     }
 

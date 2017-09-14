@@ -52,9 +52,9 @@ public class Enemy extends Ship {
 //        state = State.DESCENT;
     }
 
-//    @Override
-//    public void update(float deltaTime) {
-//        super.update(deltaTime);
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
 //        switch (state) {
 //            case DESCENT:
 //                if(getTop() <= worldBounds.getTop()) {
@@ -63,22 +63,22 @@ public class Enemy extends Ship {
 //                }
 //                break;
 //            case FIGHT:
-//                reloadTimer += deltaTime;
-//                if (reloadTimer >= reloadInterval) {
-//                    reloadTimer = 0f;
-//                    shoot();
-//                }
-//                if(getBottom() < worldBounds.getBottom()) {
+                reloadTimer += deltaTime;
+                if (reloadTimer >= reloadInterval) {
+                    reloadTimer = 0f;
+                    shoot();
+                }
+                if(getBottom() < worldBounds.getBottom()) {
 //                    mainShip.damage(bulletDamage);
 //                    boom();
-//                    destroy();
-//                }
+                    destroy();
+                }
 //                break;
 //            default:
 //                throw new RuntimeException("Unknown state = " + state);
 //        }
-//    }
-//
+    }
+
 //    public boolean isBulletCollision (Rect bullet) {
 //        return !(bullet.getRight() < getLeft() || bullet.getLeft() > getRight() || bullet.getBottom() > getTop() || bullet.getTop() < pos.y);
 //    }
