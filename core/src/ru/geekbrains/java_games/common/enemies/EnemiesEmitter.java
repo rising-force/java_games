@@ -11,6 +11,8 @@ import ru.geekuniversity.engine.utils.Regions;
 
 public class EnemiesEmitter {
 
+    private int stage;
+
     private final Rect worldBounds;
     private final EnemyPool enemyPool;
 
@@ -59,6 +61,10 @@ public class EnemiesEmitter {
         TextureRegion region2 = atlas.findRegion("enemy2");
         enemyBigRegions = Regions.split(region2, 1, 2, 2);
         bulletRegion = atlas.findRegion("bulletEnemy");
+    }
+
+    public int getStage() {
+        return stage;
     }
 
     public void generateEnemies(float deltaTime) {

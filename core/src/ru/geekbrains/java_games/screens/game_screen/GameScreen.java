@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.StringBuilder;
 
 import java.util.ArrayList;
@@ -208,11 +209,18 @@ public class GameScreen extends Base2DScreen {
     private int frags;
 
     private static final String STR_FRAGS = "Frags: ";
-
     private StrBuilder sbFrags = new StrBuilder();
+
+    private static final String STR_HP = "HP: ";
+    private StrBuilder sbHP = new StrBuilder();
+
+    private static final String STR_STAGE = "Stage: ";
+    private StrBuilder sbStage = new StrBuilder();
 
     private void printInfo() {
         font.draw(batch, sbFrags.clear().append(STR_FRAGS).append(frags), worldBounds.getLeft(), worldBounds.getTop());
+        font.draw(batch, sbHP.clear().append(STR_HP).append(mainShip.getHP()), worldBounds.pos.x, worldBounds.getTop(), Align.center);
+        font.draw(batch, sbStage.clear().append(STR_STAGE).append(enemiesEmitter.getStage()), worldBounds.getRight(), worldBounds.getTop(), Align.right);
     }
 
     @Override
