@@ -79,7 +79,7 @@ public class Enemy extends Ship {
         }
     }
 
-//    public boolean isBulletCollision (Rect bullet) {
-//        return !(bullet.getRight() < getLeft() || bullet.getLeft() > getRight() || bullet.getBottom() > getTop() || bullet.getTop() < pos.y);
-//    }
+    public boolean isBulletCollision (Rect bullet) {
+        return !(bullet.getRight() < getLeft() || bullet.getLeft() > getRight() || bullet.getBottom() > getTop() || bullet.getTop() < pos.y);
+    }
 }

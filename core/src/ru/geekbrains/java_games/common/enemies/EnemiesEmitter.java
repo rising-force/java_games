@@ -67,7 +67,7 @@ public class EnemiesEmitter {
             generateTimer = 0f;
             Enemy enemy = enemyPool.obtain();
             float type = (float) Math.random();
-//            type = 0.91f;
+            type = 0.91f;
             if(type < 0.7f) {
                 enemy.set(
                         enemySmallRegions,
