@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.StringBuilder;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ import ru.geekuniversity.engine.Font;
 import ru.geekuniversity.engine.Sprite2DTexture;
 import ru.geekuniversity.engine.math.Rect;
 import ru.geekuniversity.engine.math.Rnd;
+import ru.geekuniversity.engine.utils.StrBuilder;
 
 public class GameScreen extends Base2DScreen {
 
@@ -199,11 +201,19 @@ public class GameScreen extends Base2DScreen {
         enemyPool.drawActiveObjects(batch);
         explosionPool.drawActiveObjects(batch);
         mainShip.draw(batch);
-        font.draw(batch, "H", worldBounds.getLeft(), worldBounds.getTop());
+        printInfo();
         batch.end();
     }
 
     private int frags;
+
+    private static final String STR_FRAGS = "Frags: ";
+
+    private StrBuilder sbFrags = new StrBuilder();
+
+    private void printInfo() {
+        font.draw(batch, sbFrags.clear().append(STR_FRAGS).append(frags), worldBounds.getLeft(), worldBounds.getTop());
+    }
 
     @Override
     public void dispose() {
