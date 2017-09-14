@@ -180,7 +180,7 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         explosionPool.updateActiveSprites(deltaTime);
         if(state == State.PLAYING) {
             mainShip.update(deltaTime);
-            enemiesEmitter.generateEnemies(deltaTime);
+            enemiesEmitter.generateEnemies(deltaTime, frags);
             bulletPool.updateActiveSprites(deltaTime);
             enemyPool.updateActiveSprites(deltaTime);
             if(mainShip.isDestroyed()) {
