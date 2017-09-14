@@ -149,14 +149,14 @@ public class GameScreen extends Base2DScreen {
             }
         }
 
-        for (int i = 0; i < bulletCount; i++) {
-            Bullet bullet = bullets.get(i);
-            if(bullet.isDestroyed() || bullet.getOwner() == mainShip) continue;
-            if(mainShip.isBulletCollision(bullet)) {
-                mainShip.damage(bullet.getDamage());
-                bullet.destroy();
-            }
-        }
+//        for (int i = 0; i < bulletCount; i++) {
+//            Bullet bullet = bullets.get(i);
+//            if(bullet.isDestroyed() || bullet.getOwner() == mainShip) continue;
+//            if(mainShip.isBulletCollision(bullet)) {
+//                mainShip.damage(bullet.getDamage());
+//                bullet.destroy();
+//            }
+//        }
 
         for (int i = 0; i < enemyCount; i++) {
             Enemy enemy = enemies.get(i);
@@ -167,6 +167,11 @@ public class GameScreen extends Base2DScreen {
                 if(enemy.isBulletCollision(bullet)) {
                     enemy.damage(bullet.getDamage());
                     bullet.destroy();
+                    if(enemy.isDestroyed()) {
+                        enemy.boom();
+                        frags++;
+                        break;
+                    }
                 }
             }
         }
@@ -190,6 +195,8 @@ public class GameScreen extends Base2DScreen {
         mainShip.draw(batch);
         batch.end();
     }
+
+    private int frags;
 
     @Override
     public void dispose() {

@@ -43,9 +43,9 @@ public class Ship extends Sprite {
 //        System.out.println("hp = " + hp + " damage = " + damage);
         frame = 1;
         damageAnimationTimer = 0f;
-//        hp -= damage;
-//        if(hp < 0) hp = 0;
-//        if(hp == 0) destroy();
+        hp -= damage;
+        if(hp < 0) hp = 0;
+        if(hp == 0) destroy();
     }
 
     @Override
