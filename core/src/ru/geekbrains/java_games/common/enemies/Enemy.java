@@ -12,12 +12,12 @@ import ru.geekuniversity.engine.math.Rect;
 
 public class Enemy extends Ship {
 
-//    private enum State { DESCENT, FIGHT }
+    private enum State { DESCENT, FIGHT }
 
-//    private final Vector2 descentV = new Vector2(0f, -0.15f);
+    private final Vector2 descentV = new Vector2(0f, -0.15f);
     private final Vector2 v0 = new Vector2();
     private final MainShip mainShip;
-//    private State state;
+    private State state;
 
     Enemy(BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds, MainShip mainShip) {
         super(bulletPool, explosionPool, worldBounds);
@@ -48,21 +48,21 @@ public class Enemy extends Ship {
         this.hp = hp;
         setHeightProportion(height);
         reloadTimer = reloadInterval;
-        v.set(v0);
-//        state = State.DESCENT;
+        v.set(descentV);
+        state = State.DESCENT;
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-//        switch (state) {
-//            case DESCENT:
-//                if(getTop() <= worldBounds.getTop()) {
-//                    v.set(v0);
-//                    state = State.FIGHT;
-//                }
-//                break;
-//            case FIGHT:
+        switch (state) {
+            case DESCENT:
+                if(getTop() <= worldBounds.getTop()) {
+                    v.set(v0);
+                    state = State.FIGHT;
+                }
+                break;
+            case FIGHT:
                 reloadTimer += deltaTime;
                 if (reloadTimer >= reloadInterval) {
                     reloadTimer = 0f;
@@ -73,10 +73,10 @@ public class Enemy extends Ship {
 //                    boom();
                     destroy();
                 }
-//                break;
-//            default:
-//                throw new RuntimeException("Unknown state = " + state);
-//        }
+                break;
+            default:
+                throw new RuntimeException("Unknown state = " + state);
+        }
     }
 
 //    public boolean isBulletCollision (Rect bullet) {
