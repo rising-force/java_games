@@ -29,6 +29,7 @@ public class GameScreen extends Base2DScreen {
 
     private static final int STARS_COUNT = 50;
     private static final float STAR_HEIGHT = 0.01f;
+    private static final float FONT_SIZE = 0.02f;
 
     private BulletPool bulletPool;
     private ExplosionPool explosionPool;
@@ -80,7 +81,7 @@ public class GameScreen extends Base2DScreen {
         }
 
         font = new Font("fonts/font.fnt", "fonts/font.png");
-        font.setWorldSize(1f);
+        font.setWorldSize(FONT_SIZE);
 
         music.setLooping(true);
         music.play();
