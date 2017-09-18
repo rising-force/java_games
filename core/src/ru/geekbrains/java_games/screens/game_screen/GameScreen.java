@@ -108,7 +108,7 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         enemiesEmitter.setToNewGame();
         bulletPool.freeAllActiveObjects();
         enemyPool.freeAllActiveObjects();
-        enemyPool.freeAllActiveObjects();
+        explosionPool.freeAllActiveObjects();
     }
 
     @Override
