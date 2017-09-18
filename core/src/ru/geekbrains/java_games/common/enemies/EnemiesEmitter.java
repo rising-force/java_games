@@ -19,7 +19,7 @@ public class EnemiesEmitter {
     private final Sound sndBullet;
     private final TextureRegion bulletRegion;
 
-    private static final float ENEMY_SMALL_HEIGHT = 0.08f;
+    private static final float ENEMY_SMALL_HEIGHT = 0.1f;
     private final TextureRegion[] enemySmallRegions;
     private final Vector2 enemySmallV = new Vector2(0f, -0.2f);
     private static final float ENEMY_SMALL_BULLET_HEIGHT = 0.01f;
@@ -78,7 +78,7 @@ public class EnemiesEmitter {
             generateTimer = 0f;
             Enemy enemy = enemyPool.obtain();
             float type = (float) Math.random();
-//            type = 0.91f;
+            type = 0.1f;
             if(type < 0.7f) {
                 enemy.set(
                         enemySmallRegions,
@@ -116,7 +116,8 @@ public class EnemiesEmitter {
                         ENEMY_BIG_HEIGHT,
                         ENEMY_BIG_HP * stage);
             }
-            enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(), worldBounds.getRight() - enemy.getHalfWidth());
+//            enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(), worldBounds.getRight() - enemy.getHalfWidth());
+            enemy.pos.x = worldBounds.getLeft() + enemy.getHalfWidth();
             enemy.setBottom(worldBounds.getTop());
         }
     }

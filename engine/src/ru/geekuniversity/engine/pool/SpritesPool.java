@@ -32,7 +32,11 @@ public abstract class SpritesPool<T extends Sprite> {
 
     public void freeAllActiveObjects() {
         final int cnt = activeObjects.size();
-        for (int i = 0; i < cnt; i++) freeObjects.add(activeObjects.get(i));
+        for (int i = 0; i < cnt; i++) {
+            T sprite = activeObjects.get(i);
+            freeObjects.add(sprite);
+            sprite.flushDestroy();
+        }
         activeObjects.clear();
     }
 

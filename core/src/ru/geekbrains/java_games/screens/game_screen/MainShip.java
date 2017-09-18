@@ -32,6 +32,7 @@ public class MainShip extends Ship {
         bulletV.set(0f, 0.5f);
         bulletDamage = 1;
         hp = 100;
+        stop();
         flushDestroy();
     }
 
