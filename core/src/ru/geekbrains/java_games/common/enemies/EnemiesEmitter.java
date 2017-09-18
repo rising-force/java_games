@@ -78,7 +78,6 @@ public class EnemiesEmitter {
             generateTimer = 0f;
             Enemy enemy = enemyPool.obtain();
             float type = (float) Math.random();
-            type = 0.1f;
             if(type < 0.7f) {
                 enemy.set(
                         enemySmallRegions,
@@ -116,8 +115,8 @@ public class EnemiesEmitter {
                         ENEMY_BIG_HEIGHT,
                         ENEMY_BIG_HP * stage);
             }
-//            enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(), worldBounds.getRight() - enemy.getHalfWidth());
-            enemy.pos.x = worldBounds.getLeft() + enemy.getHalfWidth();
+            enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(), worldBounds.getRight() - enemy.getHalfWidth());
+//            enemy.pos.x = worldBounds.getLeft() + enemy.getHalfWidth();
             enemy.setBottom(worldBounds.getTop());
         }
     }
