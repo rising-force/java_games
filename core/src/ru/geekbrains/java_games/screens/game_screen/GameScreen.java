@@ -106,9 +106,9 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         frags = 0;
         mainShip.setToNewGame();
         enemiesEmitter.setToNewGame();
-        bulletPool.freeAllActiveObjects();
-        enemyPool.freeAllActiveObjects();
-        explosionPool.freeAllActiveObjects();
+        bulletPool.freeAllActiveSprites();
+        enemyPool.freeAllActiveSprites();
+        explosionPool.freeAllActiveSprites();
     }
 
     @Override
@@ -191,9 +191,9 @@ public class GameScreen extends Base2DScreen implements ActionListener {
     }
 
     private void checkCollisions() {
-        ArrayList<Enemy> enemies = enemyPool.getActiveObjects();
+        ArrayList<Enemy> enemies = enemyPool.getActiveSprites();
         final int enemyCount = enemies.size();
-        ArrayList<Bullet> bullets = bulletPool.getActiveObjects();
+        ArrayList<Bullet> bullets = bulletPool.getActiveSprites();
         final int bulletCount = bullets.size();
 
         for (int i = 0; i < enemyCount; i++) {
@@ -244,9 +244,9 @@ public class GameScreen extends Base2DScreen implements ActionListener {
     }
 
     private void deleteAllDestroyed() {
-        bulletPool.freeAllDestroyedActiveObjects();
-        enemyPool.freeAllDestroyedActiveObjects();
-        explosionPool.freeAllDestroyedActiveObjects();
+        bulletPool.freeAllDestroyedActiveSprites();
+        enemyPool.freeAllDestroyedActiveSprites();
+        explosionPool.freeAllDestroyedActiveSprites();
     }
 
     private void draw() {
@@ -255,9 +255,9 @@ public class GameScreen extends Base2DScreen implements ActionListener {
         batch.begin();
         background.draw(batch);
         for (int i = 0; i < stars.length; i++) stars[i].draw(batch);
-        bulletPool.drawActiveObjects(batch);
-        enemyPool.drawActiveObjects(batch);
-        explosionPool.drawActiveObjects(batch);
+        bulletPool.drawActiveSprites(batch);
+        enemyPool.drawActiveSprites(batch);
+        explosionPool.drawActiveSprites(batch);
         mainShip.draw(batch);
         printInfo();
         if(state == State.GAME_OVER) {
